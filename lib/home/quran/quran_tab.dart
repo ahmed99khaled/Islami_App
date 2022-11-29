@@ -254,17 +254,15 @@ class QuranTab extends StatelessWidget {
           thickness: 2,
         ),
         Expanded(
-          child: Expanded(
-            child: ListView.separated(
-              itemBuilder: (context, index) =>
-                  SuraTitleWidget(title: names[index], index: index),
-              itemCount: names.length,
-              separatorBuilder: (context, index) => Container(
-                margin: EdgeInsets.symmetric(horizontal: 60),
-                width: double.infinity,
-                height: 1,
-                color: Theme.of(context).primaryColor,
-              ),
+          child: ListView.separated(
+            itemBuilder: (context, index) =>
+                SuraTitleWidget(title: names[index], index: index),
+            itemCount: names.length,
+            separatorBuilder: (context, index) => Container(
+              margin: EdgeInsets.symmetric(horizontal: 60),
+              width: double.infinity,
+              height: 1,
+              color: Theme.of(context).primaryColor,
             ),
           ),
         ),
