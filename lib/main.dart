@@ -1,23 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:islami/home/hadeth_details/hadeth_details_screen.dart';
 import 'package:islami/home/home_screen.dart';
 import 'package:islami/home/sura_details/sura_details_screen.dart';
 import 'package:islami/my_theme.dart';
+import 'package:islami/providers/settings_provider.dart';
+import 'package:islami/splash_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => SettingsProvider(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var settingsProvider = Provider.of<SettingsProvider>(context);
     return MaterialApp(
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en'),
+        Locale('ar'),
+      ],
+      locale: Locale(settingsProvider.language),
+      // language still Arabic
+
       debugShowCheckedModeBanner: false,
       theme: Mytheme.lightTheme,
+      darkTheme: Mytheme.darkTheme,
+      themeMode: settingsProvider.currentTheme,
+
       routes: {
         HomeScreen.routeName: (_) => HomeScreen(),
         SuraDetailsScreen.routeName: (_) => SuraDetailsScreen(),
+        HadethDetailsScreen.routeName: (_) => HadethDetailsScreen(),
+        SplashScreen.routeName: (_) => SplashScreen(),
       },
-      initialRoute: HomeScreen.routeName,
+      initialRoute: SplashScreen.routeName,
     );
   }
 }

@@ -1,0 +1,21 @@
+{
+    "appTitle" : "Islami",
+    "sura_name": "Chapter Name",
+    "ahadeth"  : "Ahadeth",
+    "quran_label":"quran",
+    "sebha_label":"sebha",
+    "hadeth_label":"ahadeth",
+    "radio_label":"radio",
+    "settings_label":"settings",
+    "light":"Light",
+    "dark":"Dark",
+    "theme":"Theme",
+    "language":"Language",
+    "english":"English",
+    "arabic":"Arabic",
+    "verses_number":"Verses Number"
+
+
+
+
+}

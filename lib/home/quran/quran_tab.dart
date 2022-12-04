@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami/home/quran/sura_title_widget.dart';
-import 'package:islami/my_theme.dart';
 
 class QuranTab extends StatelessWidget {
   List<String> names = [
@@ -241,28 +241,108 @@ class QuranTab extends StatelessWidget {
     return Column(
       children: [
         Image.asset('assets/images/quran_header_image.png'),
-        Divider(
-          color: Mytheme.lightPrimary,
-          thickness: 2,
+        Table(
+          border: TableBorder(
+            verticalInside:
+                BorderSide(width: 3, color: Theme.of(context).accentColor),
+          ),
+          children: [
+            TableRow(
+              decoration: BoxDecoration(
+                  border: Border(
+                top: BorderSide(width: 3, color: Theme.of(context).accentColor),
+                bottom:
+                    BorderSide(width: 3, color: Theme.of(context).accentColor),
+              )),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    AppLocalizations.of(context)!.verses_number,
+                    style: Theme.of(context).textTheme.headline4,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    AppLocalizations.of(context)!.sura_name,
+                    style: Theme.of(context).textTheme.headline4,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
-        Text(
-          'Chapter Name',
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-        ),
-        Divider(
-          color: Mytheme.lightPrimary,
-          thickness: 2,
-        ),
+        // Divider(
+        //   color:Theme.of(context).accentColor,
+        //   thickness: 3,
+        //   height:1.5,
+        // ),
+        // Row(
+        //   mainAxisAlignment:MainAxisAlignment.spaceAround,
+        //   children:[
+        //     Text('Verses Number',
+        //       style:Theme.of(context).textTheme.headline6,
+        //     ),
+        //     Container(
+        //       width:3,
+        //       height:45,
+        //       color:Theme.of(context).accentColor,
+        //     ),
+        //     Text(
+        //       AppLocalizations.of(context)!.sura_name,
+        //       style:Theme.of(context).textTheme.headline6,
+        //     ),
+        //   ],
+        // ),
+        // // Divider(
+        // //   color: Theme.of(context).accentColor,
+        // //   thickness: 3,
+        // //   height:1.5,
+        // // ),
         Expanded(
           child: ListView.separated(
-            itemBuilder: (context, index) =>
-                SuraTitleWidget(title: names[index], index: index),
+            itemBuilder: (context, index) => Table(
+              border: TableBorder(
+                verticalInside:
+                    BorderSide(width: 3, color: Theme.of(context).accentColor),
+              ),
+              children: [
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        numOfAyah[index],
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    ),
+                    SuraTitleWidget(title: names[index], index: index),
+                  ],
+                ),
+              ],
+            ),
+
+            //     Row(
+            //   mainAxisAlignment:MainAxisAlignment.spaceAround,
+            //   children:[
+            //     Text(
+            //       numOfAyah[index],
+            //       style:Theme.of(context).textTheme.headline4,
+            //     ),
+            //     SuraTitleWidget(title: names[index], index: index),
+            //   ],
+            // ),
+
             itemCount: names.length,
             separatorBuilder: (context, index) => Container(
-              margin: EdgeInsets.symmetric(horizontal: 60),
+              margin: EdgeInsets.symmetric(horizontal: 40),
               width: double.infinity,
-              height: 1,
-              color: Theme.of(context).primaryColor,
+              height: 0,
+              color: Theme.of(context).accentColor,
             ),
           ),
         ),

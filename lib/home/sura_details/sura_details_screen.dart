@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami/home/sura_details/sura_details_args.dart';
 import 'package:islami/home/sura_details/verse_widget.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/settings_provider.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = 'Soura Details Screen';
@@ -15,15 +18,16 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var settingsProvider = Provider.of<SettingsProvider>(context);
     SuraDetailsArgs? args =
         ModalRoute.of(context)?.settings.arguments as SuraDetailsArgs;
     if (verses.isEmpty) {
       readfile(args.index + 1);
     }
     return Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             image: DecorationImage(
-          image: AssetImage('assets/images/main_background.png'),
+          image: AssetImage(settingsProvider.getMainBackground()),
           fit: BoxFit.fill,
         )),
         child: Scaffold(
@@ -34,7 +38,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
             elevation: 28,
             margin: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             child: ListView.separated(
               itemBuilder: (context, index) =>
                   VerseWidget(content: verses[index], index: index + 1),
@@ -42,8 +46,8 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
               separatorBuilder: (context, index) => Divider(
                 endIndent: 40,
                 indent: 40,
-                thickness: 1.2,
-                color: Theme.of(context).primaryColor,
+                thickness: 1,
+                color: Theme.of(context).accentColor,
               ),
             ),
           ),
