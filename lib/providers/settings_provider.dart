@@ -1,12 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsProvider extends ChangeNotifier {
   ThemeMode currentTheme = ThemeMode.light;
   String language = 'en';
 
-  void changeTheme(ThemeMode newMode) {
+  void changeTheme(ThemeMode newMode) async {
+    final prefs = await SharedPreferences.getInstance();
     currentTheme = newMode;
+    await prefs.setString(
+        'theme', currentTheme == ThemeMode.light ? 'light' : 'dark');
+
     notifyListeners();
   }
 
@@ -20,8 +24,10 @@ class SettingsProvider extends ChangeNotifier {
     return currentTheme == ThemeMode.dark;
   }
 
-  void changeLanguage(String lang) {
+  void changeLanguage(String lang) async {
+    final prefs = await SharedPreferences.getInstance();
     language = lang;
+    await prefs.setString('lang', language);
     notifyListeners();
   }
 }

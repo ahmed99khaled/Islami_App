@@ -21,7 +21,7 @@ class Mytheme {
       headline3: TextStyle(
           fontSize: 31, fontWeight: FontWeight.bold, color: Colors.black),
       headline4: TextStyle(
-          fontSize: 25, fontWeight: FontWeight.w400, color: Colors.black),
+          fontSize: 25, fontWeight: FontWeight.w500, color: Colors.black),
       headline5: TextStyle(
           fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
       subtitle2: TextStyle(color: Colors.black, fontSize: 14),

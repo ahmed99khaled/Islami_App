@@ -8,6 +8,7 @@ import 'package:islami/my_theme.dart';
 import 'package:islami/providers/settings_provider.dart';
 import 'package:islami/splash_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
@@ -16,8 +17,12 @@ void main() {
 
 class MyApp extends StatelessWidget {
   @override
+  late SettingsProvider settingsProvider;
+
   Widget build(BuildContext context) {
-    var settingsProvider = Provider.of<SettingsProvider>(context);
+    settingsProvider = Provider.of<SettingsProvider>(context);
+    getValueFromSharedPreference();
+
     return MaterialApp(
       localizationsDelegates: [
         AppLocalizations.delegate,
@@ -45,5 +50,16 @@ class MyApp extends StatelessWidget {
       },
       initialRoute: SplashScreen.routeName,
     );
+  }
+
+  void getValueFromSharedPreference() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    settingsProvider.changeLanguage(prefs.getString('lang') ?? 'en');
+    if (prefs.getString('theme') == 'light') {
+      settingsProvider.changeTheme(ThemeMode.light);
+    } else if (prefs.getString('theme') == 'dark') {
+      settingsProvider.changeTheme(ThemeMode.dark);
+    }
   }
 }
